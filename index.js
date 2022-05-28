@@ -6,7 +6,7 @@ const express = require("express");
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -73,7 +73,7 @@ const uri =
 
 
  const checkoutId = await getRapyPayCheckoutId(req, res);
-//console.log(checkoutId)
+console.log(checkoutId)
 
 
   
