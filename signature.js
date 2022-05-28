@@ -1,6 +1,6 @@
 //const https = require("https");
 const crypto = require("crypto");
-const { request } = require("http");
+const { request } = require("https");
 const accessKey = '4A20E11B9E9C6E60A075';
 const secretKey ='509be94b9b26449f41c7254e7ae802ddbdf2eabf84bb7ec72158410d9ee995592477caf141f06c7e';
 const log = false;
@@ -67,7 +67,7 @@ async function getRapyPayCheckoutId(req, res) {
           "in_dhanlaxmi_bank",
           "in_paytm_ewallet",
         ],
-        expiration: Math.round(new Date().getTime() / 1000),
+        expiration: Math.round(new Date().getTime() / 1000) + 86000,
         payment_method_types_exclude: [],
       });
 
@@ -92,7 +92,7 @@ async function getRapyPayCheckoutId(req, res) {
     },
     body: body, // JSON body goes here. Always
   };
-  await request(options, function (error, response, body) {
+  request(options, function (error, response, body) {
     
     if (error) throw new Error(error);
     console.log(body);

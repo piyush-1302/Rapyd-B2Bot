@@ -73,7 +73,7 @@ const uri =
 
 
  const checkoutId = await getRapyPayCheckoutId(req, res);
-console.log(checkoutId)
+//console.log(checkoutId)
 
 
   
