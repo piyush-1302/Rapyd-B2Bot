@@ -53,34 +53,32 @@ Database Storage :
 */
 app.post("/order", async (req, res) => {
 
-
 const uri =
   "mongodb+srv://shivam:shivam@cluster0.173wr.mongodb.net/payments?retryWrites=true&w=majority";
 
   const client = await MongoClient.connect(uri);
-
   const db = client.db();
-
   const collection = db.collection("checkout");
- collection.insertOne({
-    paymentId: ":paymentId",
-    user_id: "1",
-    merchant_id: "1",
-    cartvalue: "@cartvalue",
-    checkoutId: "RapidAPI",
-    dueDate: "currentData + 45",
-  });
 
+  if(req.body.paynow === true){
+    const checkoutId = await getRapyPayCheckoutId(req, res);
+    console.log(checkoutId)
+    collection.insertOne({
+       // paymentId: ":paymentId",
+       user_id: req.body.user_id,
+       merchant_id: req.body.merchant_id,
+       cartvalue: req.body.cartvalue,
+       checkoutId: checkoutId,
+       dueDate: new Date(new Date().getTime()+(45*24*60*60*1000)),
+       isPaid:"true",
+       currency: req.body.currency
+     });
+  }
 
- const checkoutId = await getRapyPayCheckoutId(req, res);
- console.log(checkoutId)
-
-
-  
 
   const cartValue = req.body.cartvalue;
   res.json({
-    msg: `Order processed successfully for an order of $${checkoutId}`,
+    msg: `Order processed successfully for an order of $${req.body.cartvalue}`,
   });
 });
 
