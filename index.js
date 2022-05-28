@@ -73,14 +73,14 @@ const uri =
 
 
  const checkoutId = await getRapyPayCheckoutId(req, res);
-console.log(checkoutId)
+ console.log(checkoutId)
 
 
   
 
   const cartValue = req.body.cartvalue;
   res.json({
-    msg: `Order processed successfully for an order of $${cartValue}`,
+    msg: `Order processed successfully for an order of $${checkoutId}`,
   });
 });
 
