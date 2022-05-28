@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/piyush-1302/blink-pay#readme",
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "express": "^4.18.1"
   },
   "devDependencies": {
