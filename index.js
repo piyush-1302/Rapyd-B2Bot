@@ -83,7 +83,8 @@ app.post("/order", async (req, res) => {
       merchant_id: req.body.merchant_id,
       cartvalue: req.body.cartvalue,
       //  checkoutId: checkoutId,
-      dueDate: new Date().getTime() + (45 * 24 * 60 * 60 * 1000),
+      // dueDate: new Date().getTime() + (45 * 24 * 60 * 60 * 1000),
+      dueDate: new Date().getTime() + (2 * 24 * 60 * 60 * 1000),
       humanDate: new Date(new Date().getTime() + (45 * 24 * 60 * 60 * 1000)),
       isPaid: "false",
       currency: req.body.currency
