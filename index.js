@@ -152,7 +152,7 @@ app.post("/retrive-outstanding-payment", async (req, res) => {
         merchantId: data[i].merchant_id,
         dueDate: data[i].humanDate,
         paymentId: data[i].paymentId,
-        message: `${data[i].currency} ${data[i].cartvalue} due on ${data[i].humanDate}`,
+        message: `${data[i].paymentId}: ${data[i].currency} ${data[i].cartvalue} due on ${data[i].humanDate} to merchant ABC.`,
       })
     }
   }
