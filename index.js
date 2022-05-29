@@ -18,8 +18,8 @@ app.get("/", (req, res) => {
   });
 });
 
-async function mongoDb() {
-
+const getHumanDate = (date) => {
+  return date.toLocaleDateString(undefined, {weekday: "short", day: "numeric", month: "short", year: "numeric"})
 }
 
 /*
@@ -72,7 +72,7 @@ app.post("/order", async (req, res) => {
       cartvalue: req.body.cartvalue,
       checkoutId: checkoutId,
       dueDate: new Date().getTime(),
-      humanDate: new Date(new Date().getTime()),
+      humanDate: getHumanDate(new Date()),
       isPaid: "true",
       currency: req.body.currency
     });
@@ -83,9 +83,8 @@ app.post("/order", async (req, res) => {
       merchant_id: req.body.merchant_id,
       cartvalue: req.body.cartvalue,
       //  checkoutId: checkoutId,
-      // dueDate: new Date().getTime() + (45 * 24 * 60 * 60 * 1000),
       dueDate: new Date().getTime() + (2 * 24 * 60 * 60 * 1000),
-      humanDate: new Date(new Date().getTime() + (45 * 24 * 60 * 60 * 1000)),
+      humanDate: getHumanDate(new Date(new Date().getTime() + (45 * 24 * 60 * 60 * 1000))),
       isPaid: "false",
       currency: req.body.currency
     });
@@ -152,7 +151,8 @@ app.post("/retrive-outstanding-payment", async (req, res) => {
         currency: data[i].currency,
         merchantId: data[i].merchant_id,
         dueDate: data[i].humanDate,
-        paymentId: data[i].paymentId
+        paymentId: data[i].paymentId,
+        message: `${data[i].currency} ${data[i].cartvalue} due on ${data[i].humanDate}`,
       })
     }
   }
